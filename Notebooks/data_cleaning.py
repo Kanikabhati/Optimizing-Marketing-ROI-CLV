@@ -1,16 +1,30 @@
 import pandas as pd
-# Load the Online Retail dataset (update filename if needed)
+
+# Load the Online Retail dataset (make sure filename matches)
 df = pd.read_excel('Data/raw/Online Retail.xlsx')
-# Basic exploration
+
+# Explore dataset
 print("Shape:", df.shape)
 print("Columns:", df.columns)
-print("First 5 rows:\n", df.head())
-# Count missing CustomerID
+print(df.head())
+
+# Check missing Customer IDs
 missing_customer_ids = df['CustomerID'].isna().sum()
 print("Missing CustomerIDs:", missing_customer_ids)
-# Count transactions with negative Quantity (returns)
+
+# Count returns (negative Quantity)
 negative_qty = (df['Quantity'] < 0).sum()
-print("Negative Quantity (returns):", negative_qty)
-# Count duplicate rows
+print("Negative Quantity entries (returns):", negative_qty)
+
+# Check duplicate rows
 duplicate_rows = df.duplicated().sum()
 print("Duplicate rows:", duplicate_rows)
+
+# Data cleaning
+df_clean = df.dropna(subset=['CustomerID'])
+df_clean = df_clean.drop_duplicates()
+df_clean['IsReturn'] = df_clean['Quantity'] < 0
+df_clean = df_clean[df_clean['Country'] == 'United Kingdom']  # Focus on UK data
+
+# Save cleaned data to processed folder
+df_clean.to_csv('Data/processed/online_retail_cleaned.csv', index=False)
