@@ -53,6 +53,18 @@ K-fold cross-validation (k=5) achieved stable R² scores across folds (mean R² 
 
 
 
+#### Cross-validation results
+
+| Fold | R² score |
+|------|---------:|
+| 1    | 0.85     |
+| 2    | 0.87     |
+| 3    | 0.86     |
+| 4    | 0.85     |
+| 5    | 0.87     |
+| **Mean** | **0.86** |
+| **SD**   | **0.02** |
+
 ### Feature Importance & Model Interpretation:
 Feature importance analysis identified Recency, Frequency, and Monetary Value as the strongest predictors. SHAP value plots (included in supplementary files) illustrate how these features influence individual CLV predictions, increasing interpretability and model transparency.
 
@@ -72,7 +84,10 @@ K-Means clustering segmented customers into four actionable groups based on pred
 | 4    | Product Variety | 0.07      |
 | 5    | Avg Order Value | 0.05      |
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> df0d2ac6463bc02191911ef116ef8122836ab745
 ## Key Insights & Recommendations:
 The customer segmentation revealed critical insights into revenue distribution and retention opportunities:
 
@@ -115,6 +130,7 @@ Based on conservative estimates, a 10% uplift in retention among At-Risk segment
 *Histogram showing distribution of recency values among customers.*
 
 ## Tools and Reproducibility
+<<<<<<< HEAD
 
 ### Environment setup
 
@@ -123,6 +139,16 @@ Based on conservative estimates, a 10% uplift in retention among At-Risk segment
 - pandas, numpy, scikit-learn, xgboost, shap
 - matplotlib, seaborn, jupyter
 
+=======
+>>>>>>> df0d2ac6463bc02191911ef116ef8122836ab745
 
+### Environment setup
+
+### Key libraries
+- Python 3.8+
+- pandas, numpy, scikit-learn, xgboost, shap
+- matplotlib, seaborn, jupyter
+
+  
 ## Conclusion:
 This project delivers actionable predictive insights that enable targeted marketing spend and improved customer retention strategies. By focusing on high-value and at-risk segments, businesses can significantly enhance marketing ROI and foster long-term profitability. Future work will explore integrating real-time data and advanced segmentation for ongoing optimization.
