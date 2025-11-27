@@ -70,22 +70,22 @@ Based on conservative estimates, a 10% uplift in retention among At-Risk segment
 - Incorporating additional demographic or behavioral data could improve segmentation.
 - ROI uplift projections require validation through live campaigns.
 
-## Visualizations:
+## Visualizations
 
-### Customer Segment Sizes 
-![alt text](image.png)
+### Customer Segment Sizes
+![Customer segment distribution across four clusters](./images/segment_sizes.png)  
 *Bar chart showing the distribution of customers across four segments.*
 
-### Total Lifetime Value (LTV) by Segment 
-![alt text](image-5.png)
+### Total Lifetime Value (LTV) by Segment
+![Total predicted LTV contribution by customer segment](./images/segment_ltv.png)  
 *Bar chart quantifying total predicted revenue contribution from each segment.*
 
-### Feature Correlation Heatmap  
-![alt text](image-2.png)
+### Feature Correlation Heatmap
+![Correlation matrix of key numeric features](./images/correlation_heatmap.png)  
 *Heatmap visualizing relationships between key numeric features.*
 
 ### Distribution of Recency
-![alt text](image-4.png)
+![Histogram of customer recency distribution](./images/recency_distribution.png)  
 *Histogram showing distribution of recency values among customers.*
 
 ## Tools and Reproducibility:
