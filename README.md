@@ -2,13 +2,16 @@
 Predictive CLV model for customer segmentation and targeted marketing strategy
 
 ## Executive Summary:
+
 This project analyzes over one year of transactional data from a UK-based online retailer to predict customer lifetime value (CLV) and turn it into concrete marketing actions. Using an XGBoost regression model, the solution explains around 87% of the variance in CLV and then segments customers into four groups based on predicted value and recency. This reveals that a small group of high-value customers contributes a disproportionate share of revenue, while a meaningful share of that value sits in segments that show early churn risk. By reallocating a portion of new customer acquisition spend into targeted retention campaigns for at-risk high-value segments, this work aims to improve marketing ROI and long-term profitability.
 
 ## Business Problem:
+
 Most e-commerce businesses still treat customers as if they are equally valuable, pushing broad discount campaigns and generic email flows. In reality, a small minority of customers drives the majority of profit, while many low-value customers absorb marketing budget without meaningful return. The key question this project answers is:​
 “How can we use predictive CLV and behavioral data to segment customers by future value, so that marketing budget is focused where it creates the highest incremental return?”
 
 ## Data Source and Preprocessing:
+
 The dataset originates from the UCI Machine Learning Repository’s "Online Retail" collection, capturing transactional data from a UK-based retailer between December 2009 and December 2011. It includes over 540,000 sales records containing invoice numbers, product codes, quantities, invoice dates, unit prices, customer IDs, and country information.
 The raw data is complex and realistic, featuring missing CustomerID entries (approximately 135,000 rows), returned items (negative quantity values), and duplicate transactions. To prepare for modeling, the following preprocessing steps were performed:
 - Removed all transactions lacking a CustomerID, as they cannot be attributed to specific customers.
@@ -18,6 +21,7 @@ The raw data is complex and realistic, featuring missing CustomerID entries (app
 This preprocessing mirrors real-world data challenges and underscores practical rigor necessary for robust predictive analytics.
 
 ## Feature Engineering:
+
 To capture customer behavior and value, a series of business-relevant features were derived from transactional data:
 - Recency: Number of days since the customer’s last purchase, measuring engagement freshness.
 - Frequency: Total number of purchases made, indicating loyalty and engagement.
@@ -27,15 +31,19 @@ To capture customer behavior and value, a series of business-relevant features w
 - Customer Lifespan: Duration (in years) between first and last purchases, estimating customer longevity.
 
 The target variable, Customer Lifetime Value (CLV), was calculated using the practical formula:
+
 **CLV = Average Order Value × Frequency × Customer Lifespan (Years)**
+
 This balances business relevance with data availability and predictive potential.
 
 Advanced feature engineering and aggregation were implemented in Python scripts, ensuring reproducibility and clarity.
 
 ## Modeling & Segmentation:
+
 The predictive model used was an XGBoost regressor, chosen for its ability to handle non-linear relationships and robustness to outliers common in retail transactional data. The model was trained on the engineered feature set to predict CLV and achieved an R² of 0.87 on the test set via an 80/20 split.
 
 ### Model Validation:
+
 K-fold cross-validation (k=5) achieved stable R² scores across folds (mean R² = 0.74, SD = 0.13), confirming model robustness. The hold-out test set R² of 0.85 slightly exceeds CV performance, indicating good generalization.
 
 
@@ -53,6 +61,7 @@ K-fold cross-validation (k=5) achieved stable R² scores across folds (mean R² 
 
 
 ### Feature Importance & Model Interpretation:
+
 Feature importance analysis identified Recency, Frequency, and Monetary Value as the strongest predictors. SHAP value plots (included in supplementary files) illustrate how these features influence individual CLV predictions, increasing interpretability and model transparency.
 
 K-Means clustering segmented customers into four actionable groups based on predicted CLV and recency:
@@ -72,6 +81,7 @@ K-Means clustering segmented customers into four actionable groups based on pred
 | 5    | Avg Order Value | 0.05      |
 
 ## Key Insights & Recommendations:
+
 The customer segmentation revealed critical insights into revenue distribution and retention opportunities:
 
 - The Champions segment, though small in size, contributes a disproportionate share of revenue, characterized by recent purchases and the highest predicted lifetime value.
@@ -88,6 +98,7 @@ Strategy: Minimize spend here by limiting contact to low-cost, generic email cam
 Based on conservative estimates, a 10% uplift in retention among At-Risk segments is projected to yield substantial incremental revenue over acquisition alone.
 
 ## Assumptions and Limitations:
+
 - CLV estimates rely on historical behavior which may not fully predict future changes.
 - Exclusions of transactions with missing CustomerID could bias results if systematic.
 - Model assumes consistent customer behavior over time, lacking seasonality adjustments.
@@ -97,24 +108,50 @@ Based on conservative estimates, a 10% uplift in retention among At-Risk segment
 ## Visualizations
 
 ### Customer Segment Sizes
+
 ![Customer segment distribution across four clusters](./images/segment_sizes.png)  
 *Bar chart showing the distribution of customers across four segments.*
 
 ### Total Lifetime Value (LTV) by Segment
+
 ![Total predicted LTV contribution by customer segment](./images/segment_ltv.png)  
 *Bar chart quantifying total predicted revenue contribution from each segment.*
 
 ### Feature Correlation Heatmap
+
 ![Correlation matrix of key numeric features](./images/correlation_heatmap.png)  
 *Heatmap visualizing relationships between key numeric features.*
 
 ### Distribution of Recency
+
 ![Histogram of customer recency distribution](./images/recency_distribution.png)  
 *Histogram showing distribution of recency values among customers.*
 
-## Tools and Reproducibility
-- Python 3.8 with libraries: pandas, numpy, scikit-learn, xgboost, shap, matplotlib, seaborn.
-- All data processing and modeling code is provided in clean, commented Jupyter notebooks for reproducibility.
-
 ## Conclusion:
+
 This project delivers actionable predictive insights that enable targeted marketing spend and improved customer retention strategies. By focusing on high-value and at-risk segments, businesses can significantly enhance marketing ROI and foster long-term profitability. Future work will explore integrating real-time data and advanced segmentation for ongoing optimization.
+
+## Tools and Reproducibility
+
+### Environment setup
+
+```bash
+git clone https://github.com/Kanikabhati/Optimizing-Marketing-ROI.git
+cd Optimizing-Marketing-ROI
+python -m venv venv
+venv\Scripts\activate   # Windows
+
+# source venv/bin/activate  # macOS/Linux
+pip install -r requirements.txt
+```
+
+
+### Key libraries
+
+- Python 3.8+, pandas, numpy, scikit-learn, xgboost, shap
+- matplotlib, seaborn, jupyter
+
+### Run order
+
+Notebooks/Scripts: data cleaning → features → modeling → segments
+
