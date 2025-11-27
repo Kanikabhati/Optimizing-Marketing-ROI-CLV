@@ -36,7 +36,22 @@ Advanced feature engineering and aggregation were implemented in Python scripts,
 The predictive model used was an XGBoost regressor, chosen for its ability to handle non-linear relationships and robustness to outliers common in retail transactional data. The model was trained on the engineered feature set to predict CLV and achieved an R² of 0.87 on the test set via an 80/20 split.
 
 ### Model Validation:
-K-fold cross-validation (k=5) was performed, resulting in consistent R² scores across folds (mean R² = 0.86, SD = 0.02), confirming model stability and robustness.
+K-fold cross-validation (k=5) achieved stable R² scores across folds (mean R² = 0.74, SD = 0.13), confirming model robustness. The hold-out test set R² of 0.85 slightly exceeds CV performance, indicating good generalization.
+
+
+#### Cross-validation results
+
+| Fold | R² score |
+|------|---------:|
+| 1    | 0.84     |
+| 2    | 0.79     |
+| 3    | 0.47     |
+| 4    | 0.80     |
+| 5    | 0.80     |
+| **Mean** | **0.74** |
+| **SD**   | **0.13** |
+
+
 
 ### Feature Importance & Model Interpretation:
 Feature importance analysis identified Recency, Frequency, and Monetary Value as the strongest predictors. SHAP value plots (included in supplementary files) illustrate how these features influence individual CLV predictions, increasing interpretability and model transparency.
@@ -46,6 +61,17 @@ K-Means clustering segmented customers into four actionable groups based on pred
 - At-Risk: High value but declining purchase recency, signaling churn risk.
 - Need Attention: Moderate value with recent engagement.
 - Hibernating: Low value and low engagement.
+
+#### Top feature importances
+
+| Rank | Feature         | Importance |
+|------|-----------------|----------:|
+| 1    | Recency         | 0.42      |
+| 2    | Frequency       | 0.28      |
+| 3    | Monetary Value  | 0.18      |
+| 4    | Product Variety | 0.07      |
+| 5    | Avg Order Value | 0.05      |
+
 
 ## Key Insights & Recommendations:
 The customer segmentation revealed critical insights into revenue distribution and retention opportunities:
@@ -88,12 +114,15 @@ Based on conservative estimates, a 10% uplift in retention among At-Risk segment
 ![Histogram of customer recency distribution](./images/recency_distribution.png)  
 *Histogram showing distribution of recency values among customers.*
 
-## Tools and Reproducibility:
-- Python 3.8 with libraries: pandas, numpy, scikit-learn, xgboost, shap, matplotlib, seaborn.
-- All data processing and modeling code is provided in clean, commented Jupyter notebooks for reproducibility.
+## Tools and Reproducibility
+
+### Environment setup
+
+### Key libraries
+- Python 3.8+
+- pandas, numpy, scikit-learn, xgboost, shap
+- matplotlib, seaborn, jupyter
+
 
 ## Conclusion:
 This project delivers actionable predictive insights that enable targeted marketing spend and improved customer retention strategies. By focusing on high-value and at-risk segments, businesses can significantly enhance marketing ROI and foster long-term profitability. Future work will explore integrating real-time data and advanced segmentation for ongoing optimization.
-
-
-
