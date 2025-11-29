@@ -275,7 +275,7 @@ These controls ensure that optimization decisions based on CLV remain robust and
 
 ![Total CLV by segment](images/segment_ltv.png)
 
-![Recency distribution](images/Recency_distribution.png)
+![Recency distribution](images/recency_distribution.png)
 
 ![Monetary distribution](images/Monetary_distribution.png)
 
