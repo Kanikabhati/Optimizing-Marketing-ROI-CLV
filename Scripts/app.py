@@ -12,14 +12,11 @@ def load_data():
     monthly_forecast = pd.read_csv("Data/processed/monthly_clv_forecast.csv")
     monthly_forecast["month"] = pd.to_datetime(monthly_forecast["month"])
 
-    # Ensure the CLV column is named 'pred_clv'
-    if "pred_clv" not in clv_bgnbd.columns:
-        for alt in ["pred_clv_prob", "clv", "CLV"]:
-            if alt in clv_bgnbd.columns:
-                clv_bgnbd = clv_bgnbd.rename(columns={alt: "pred_clv"})
-                break
+    # Explicitly rename the CLV column
+    clv_bgnbd = clv_bgnbd.rename(columns={"customer_lifetime_value": "pred_clv"})
 
     return segments, clv_bgnbd, clv_opt, monthly_forecast
+
 
 
 segments, clv_bgnbd, clv_opt, monthly_forecast = load_data()
