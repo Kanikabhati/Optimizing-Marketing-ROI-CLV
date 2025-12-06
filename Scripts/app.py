@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+
 # ---------- Load data ----------
 @st.cache_data
 def load_data():
@@ -10,12 +11,21 @@ def load_data():
     clv_opt = pd.read_csv("Data/processed/customer_clv_optimized.csv")
     monthly_forecast = pd.read_csv("Data/processed/monthly_clv_forecast.csv")
     monthly_forecast["month"] = pd.to_datetime(monthly_forecast["month"])
+
+    # Ensure the CLV column is named 'pred_clv'
+    if "pred_clv" not in clv_bgnbd.columns:
+        for alt in ["pred_clv_prob", "clv", "CLV"]:
+            if alt in clv_bgnbd.columns:
+                clv_bgnbd = clv_bgnbd.rename(columns={alt: "pred_clv"})
+                break
+
     return segments, clv_bgnbd, clv_opt, monthly_forecast
+
 
 segments, clv_bgnbd, clv_opt, monthly_forecast = load_data()
 
-# Merge CLV + optimized spend if customer_id present in all
-clv_full = clv_bgnbd.merge(clv_opt, on="customer_id", suffixes=("_prob", "_opt"), how="left")
+# Merge CLV + optimized spend (no suffix on pred_clv)
+clv_full = clv_bgnbd.merge(clv_opt, on="customer_id", how="left")
 
 # ---------- Sidebar ----------
 st.sidebar.title("CLV Dashboard")
@@ -40,15 +50,19 @@ st.write("Selected segment details:")
 seg_ids = segments.loc[segments["Segment"] == segment_filter, "CustomerID"].astype(str)
 seg_clv = clv_full[clv_full["customer_id"].astype(str).isin(seg_ids)]
 
+if "pred_clv" in seg_clv.columns and len(seg_clv):
+    avg_clv_value = f"${seg_clv['pred_clv'].mean():,.0f}"
+else:
+    avg_clv_value = "N/A"
+
 st.metric(
     label="Avg probabilistic CLV (selected segment)",
-    value=f"${seg_clv['pred_clv'].mean():,.0f}" if len(seg_clv) else "N/A"
+    value=avg_clv_value
 )
 
 # ---------- Optimization impact ----------
 st.subheader("Budget Optimization Impact")
 
-# Hard‑code from your optimization run; or load from a small JSON/CSV if you prefer
 budget = 100000
 uniform_clv = 2636038.92
 optimized_clv = 2724476.24
