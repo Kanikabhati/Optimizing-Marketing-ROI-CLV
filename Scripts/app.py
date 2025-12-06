@@ -20,6 +20,8 @@ segments, clv_bgnbd, clv_opt, monthly_forecast = load_data()
 
 # Merge CLV + optimized spend (no suffix on pred_clv)
 clv_full = clv_bgnbd.merge(clv_opt, on="customer_id", how="left")
+if "pred_clv_x" in clv_full.columns:
+    clv_full = clv_full.rename(columns={"pred_clv_x": "pred_clv"})
 
 # ---------- Sidebar ----------
 st.sidebar.title("CLV Dashboard")
@@ -47,10 +49,17 @@ seg_clv = clv_full[clv_full["customer_id"].astype(str).isin(seg_ids)]
 st.write("Debug – rows in seg_clv:", len(seg_clv))
 st.write("Columns:", list(seg_clv.columns))
 
-if "pred_clv" in seg_clv.columns and len(seg_clv):
-    avg_clv_value = f"${seg_clv['pred_clv'].mean():,.0f}"
+if len(seg_clv):
+    # Prefer the original CLV from BG/NBD
+    if "pred_clv_x" in seg_clv.columns:
+        avg_clv_value = f"${seg_clv['pred_clv_x'].mean():,.0f}"
+    elif "pred_clv" in seg_clv.columns:
+        avg_clv_value = f"${seg_clv['pred_clv'].mean():,.0f}"
+    else:
+        avg_clv_value = "N/A"
 else:
     avg_clv_value = "N/A"
+
 
 st.metric(
     label="Avg probabilistic CLV (selected segment)",
