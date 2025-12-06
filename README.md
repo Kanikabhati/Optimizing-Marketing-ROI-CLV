@@ -1,5 +1,8 @@
 # Optimizing Marketing ROI with Customer Lifetime Value
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://optimizing-marketing-roi-clv-jeeclhseqoyx2auedasnqh.streamlit.app/)
+
+
 Predictive and probabilistic CLV modeling for segmentation, budget optimization, and forward-looking revenue planning.
 
 ---
@@ -300,6 +303,12 @@ venv\Scripts\activate # Windows
 source venv/bin/activate # macOS / Linux
 pip install -r requirements.txt
 
+### Streamlit app
+
+- Run locally: `streamlit run Scripts/app.py`
+- Live demo: https://optimizing-marketing-roi-clv-jeeclhseqoyx2auedasnqh.streamlit.app/
+
+
 ### requirements.txt
 pandas==2.2.2
 numpy==2.0.2
@@ -308,7 +317,7 @@ xgboost==2.1.1
 lifetimes==0.11.3
 statsmodels==0.14.3
 matplotlib==3.9.2
-
+streamlit
 
 ### Recommended Run Order
 
