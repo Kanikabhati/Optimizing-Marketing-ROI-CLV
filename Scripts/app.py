@@ -12,11 +12,8 @@ def load_data():
     monthly_forecast = pd.read_csv("Data/processed/monthly_clv_forecast.csv")
     monthly_forecast["month"] = pd.to_datetime(monthly_forecast["month"])
 
-    # Explicitly rename the CLV column
-    clv_bgnbd = clv_bgnbd.rename(columns={"customer_lifetime_value": "pred_clv"})
-
+    # No rename needed – CLV is already 'pred_clv'
     return segments, clv_bgnbd, clv_opt, monthly_forecast
-
 
 
 segments, clv_bgnbd, clv_opt, monthly_forecast = load_data()
@@ -46,6 +43,9 @@ st.bar_chart(seg_counts)
 st.write("Selected segment details:")
 seg_ids = segments.loc[segments["Segment"] == segment_filter, "CustomerID"].astype(str)
 seg_clv = clv_full[clv_full["customer_id"].astype(str).isin(seg_ids)]
+
+st.write("Debug – rows in seg_clv:", len(seg_clv))
+st.write("Columns:", list(seg_clv.columns))
 
 if "pred_clv" in seg_clv.columns and len(seg_clv):
     avg_clv_value = f"${seg_clv['pred_clv'].mean():,.0f}"
