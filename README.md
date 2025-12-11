@@ -11,7 +11,6 @@ Predictive and probabilistic CLV modeling for segmentation, budget optimization,
 
 This project uses real e‑commerce transaction data to estimate customer lifetime value (CLV), segment customers, and optimally allocate a fixed marketing budget. A tree‑based XGBoost model explains ~85–87% of the variance in CLV, while a BG/NBD + Gamma‑Gamma model provides time‑aware probabilistic CLV at the customer level. These CLV estimates feed into a constrained optimization routine that reallocates a \$100K budget toward high‑value customers, increasing total expected CLV by about \$88K (+3.4%) versus a naive uniform allocation. An ARIMA model then forecasts aggregate monthly CLV, linking today’s budget decisions to expected revenue over the next six months.  
 
-For a hiring manager, this demonstrates end‑to‑end ownership of a quantitative pipeline (data → models → optimization → forecasting → communication) with clear, dollar‑denominated impact.
 
 ### Highlights
 
@@ -341,10 +340,5 @@ streamlit
 
 ---
 
-## Takeaways for Data & Quant Roles
 
-- Demonstrates practical use of supervised learning, probabilistic models, time‑series analysis, and constrained optimization in a single, coherent project.  
-- Emphasizes evaluation and interpretability with R², MAE, RMSE, and hold‑out checks.  
-- Translates model outputs into dollar‑level metrics and explicit ROI, which is critical for product, marketing science, and quant roles in financial services.  
-- Shows strong engineering hygiene: modular scripts, reproducible environment, clear run order, and a concise analysis notebook ready for stakeholder review.
 
