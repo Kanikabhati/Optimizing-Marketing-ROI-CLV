@@ -167,21 +167,12 @@ This quantifies how accurately the probabilistic model generalizes to unseen per
 
 For each customer ( i ):
 
-- Decision variable \( x_i \): marketing spend.  
-- Probabilistic CLV \( \text{clv}_i \).  
-- Response function:
-
-\[
-\text{CLV}_i(x_i) = \text{clv}_i \left(1 + A \left(1 - e^{-B x_i}\right)\right)
-\]
-
-with \( A = 0.3 \) (30% max uplift) and \( B = 0.0001 \) (saturation speed).
+- Decision variable ( x_i ): marketing spend.  
+- Probabilistic CLV ( {clv}_i ).  
 
 Objective:
 
-\[
-\max_x \sum_i \text{CLV}_i(x_i)
-\]
+[max_x \sum_i {CLV}_i(x_i)]
 
 Subject to:
 
