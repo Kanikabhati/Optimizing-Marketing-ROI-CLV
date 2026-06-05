@@ -176,22 +176,22 @@ Objective:
 
 Subject to:
 
-- \( \sum_i x_i \le BUDGET = \$100{,}000 \)  
-- \( x_i \ge 0 \)  
+- ( sum_i x_i \BUDGET = $100{,}000 )  
+- ( x_i)  
 
 ### Implementation and Results
 
 Using SciPy SLSQP:
 
 - Baseline: uniform allocation of \$100K across customers.  
-- Optimized: choose \( x_i \) to maximize total uplifted CLV.  
+- Optimized: choose ( x_i ) to maximize total uplifted CLV.  
 
 Results:
 
-- Budget: **\$100,000**  
-- CLV (uniform spend): **\$2,636,038.92**  
-- CLV (optimized spend): **\$2,724,476.24**  
-- Incremental CLV: **\$88,437.32**  
+- Budget: **$100,000**  
+- CLV (uniform spend): **$2,636,038.92**  
+- CLV (optimized spend): **$2,724,476.24**  
+- Incremental CLV: **$88,437.32**  
 - Improvement over uniform: **3.35% (~3.4%)**  
 
 Per‑customer optimal spends are saved to `Data/processed/customer_clv_optimized.csv`. This step demonstrates practical optimization under constraints and how to turn CLV into a concrete budget policy.
