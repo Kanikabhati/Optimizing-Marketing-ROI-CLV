@@ -64,9 +64,7 @@ Customer‑level features are built in `Scripts/Feature_Engineering.py` and save
 
 The CLV label (`LTV`) is defined as:
 
-\[
-\text{CLV} = \text{AverageOrderValue} \times \text{Frequency} \times \text{CustomerLifespanYears}
-\]
+{CLV} = {AverageOrderValue}{Frequency}{CustomerLifespanYears}
 
 This balances interpretability with predictive power and is suitable for regression.
 
@@ -167,7 +165,7 @@ This quantifies how accurately the probabilistic model generalizes to unseen per
 
 ### Mathematical Formulation
 
-For each customer \( i \):
+For each customer ( i ):
 
 - Decision variable \( x_i \): marketing spend.  
 - Probabilistic CLV \( \text{clv}_i \).  
